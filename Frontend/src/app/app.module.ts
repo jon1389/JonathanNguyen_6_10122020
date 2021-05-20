@@ -12,7 +12,6 @@ import { HeaderComponent } from './header/header.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
 import { AuthInterceptor } from './interceptors/auth-interceptor';
 
 @NgModule({
@@ -31,8 +30,6 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule,
-    MatButtonModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
