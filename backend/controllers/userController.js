@@ -3,18 +3,34 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 
+const handleErrors = (err) =>
+{
+    console.log(err.message, err.code);
+};
+
 exports.signup = (req, res, next) => {
-    bcrypt.hash(req.body.password, 10)
-        .then(hash => {
-            const user = new User({
-                email: req.body.email,
-                password: hash
-            });
-            user.save()
-                .then(() => res.status(201).json({ message: 'Utilisateur crée !'}))
-                .catch(error => req.status(400).json({ error }));
-        })
-        .catch(error => res.status(500).json({ error }));
+    const isPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    try{
+        if (isPassword.test(req.body.password)) {
+            bcrypt.hash(req.body.password, 10)
+                .then(hash => {
+                    const user = new User({
+                        email: req.body.email,
+                        password: hash
+                    });
+                    user.save()
+                        .then(() => res.status(201).json({ message: 'Utilisateur crée !'}))
+                        .catch(error => res.status(400).json( handleErrors(error) ));
+                })
+                .catch(error => res.status(500).json({ error }));
+        }
+        else {
+            throw new Error("Le mot de passe doit contenir au moins 8 caractères dont une majuscule, une minuscule, un nombre et un caractère spécial");
+        }
+    }
+    catch(err) {
+        return res.status(500).json( handleErrors(err) )
+    }
 };
 
 exports.login = (req, res, next) => {

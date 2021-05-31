@@ -1,4 +1,4 @@
-const Sauce = require('../models/Sauces')
+const Sauce = require('../models/Sauces');
 const fs = require('fs');
 
 exports.createSauce = (req, res, next) => {
@@ -10,7 +10,7 @@ exports.createSauce = (req, res, next) => {
     });
     sauce.save()
         .then(() => res.status(201).json({ message: 'Sauce enregistrée !'}))
-        .catch(error => res.status(400).json({ error }));
+        .catch((error) => res.status(400).json({ error }));
 };
 
 exports.modifySauce = (req, res, next) => {
@@ -84,7 +84,7 @@ exports.rateSauce = (req, res, next) => {
                             $inc: {likes: -1}, // On incrémente les likes de -1
                             $pull: {usersLiked: userId} // On retire le user du tableau
                         })
-                            .then(() => res.status(201).json({ message: 'Like retiré !' }))
+                            .then(() => res.status(201).json({ message: 'Votre mention \'j\'aime\' a été retirée !' }))
                             .catch((error) => res.status(400).json({ error }));
                 }
                 if (sauce.usersDisliked.includes(userId)) { // Si l'utilisateur est dans le tableau des dislikes(il a déjà noté la sauce)
@@ -94,7 +94,7 @@ exports.rateSauce = (req, res, next) => {
                             $inc: {dislikes: -1},  // On incrémente les likes de -1
                             $pull: {usersDisliked: userId} // On retire le user du tableau
                         })
-                            .then(() => res.status(201).json({ message: 'Dislike retiré !' }))
+                            .then(() => res.status(201).json({ message: 'Votre mention \'je n\'aime pas\' a été retirée !' }))
                             .catch((error) => res.status(400).json({ error }));
                 }
             })
