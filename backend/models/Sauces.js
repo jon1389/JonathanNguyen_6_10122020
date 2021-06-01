@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
-const isAlphaNum = (/^[a-zA-ZàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]+(?:[\s-][a-zA-Z]+)+$/i);
+const isAlphaNum = /^[a-zA-Zà-żÀ-Ż]+(?:[\s-][a-zA-Zà-żÀ-Ż.]+)+$/i;
 
 const sauceSchema = mongoose.Schema({
     userId: { 
@@ -12,10 +12,9 @@ const sauceSchema = mongoose.Schema({
         type: String, 
         required: true, 
         validate(value){
-            console.log(isAlphaNum.test(value))
+            // console.log(isAlphaNum.test(value)) // Vérifie si la condition est true ou false
             if(!isAlphaNum.test(value)){
                 console.log('Le champ Name ne peut contenir des caractères spéciaux');
-                console.log(value);
                 throw new Error('Ce champ ne peut contenir des caractères spéciaux')
             }
         } 
@@ -24,10 +23,9 @@ const sauceSchema = mongoose.Schema({
         type: String, 
         required: true, 
         validate(value){
-            console.log(isAlphaNum.test(value))
+            // console.log(isAlphaNum.test(value))
             if(!isAlphaNum.test(value)){
                 console.log('Le champ Manufacturer ne peut contenir des caractères spéciaux');
-                console.log(value);
                 throw new Error('Ce champ ne peut contenir des caractères spéciaux')
             }
         }     
@@ -36,10 +34,9 @@ const sauceSchema = mongoose.Schema({
         type: String, 
         required: true, 
         validate(value){
-            console.log(isAlphaNum.test(value))
+            // console.log(isAlphaNum.test(value))
             if(!isAlphaNum.test(value)){
                 console.log('Le champ Description ne peut contenir des caractères spéciaux');
-                console.log(value);
                 throw new Error('Ce champ ne peut contenir des caractères spéciaux')
             }
         }     
@@ -48,10 +45,9 @@ const sauceSchema = mongoose.Schema({
         type: String, 
         required: true, 
         validate(value){
-            console.log(isAlphaNum.test(value))
+            // console.log(isAlphaNum.test(value))
             if(!isAlphaNum.test(value)){
                 console.log('Le champ Main Pepper Ingredient ne peut contenir des caractères spéciaux');
-                console.log(value);
                 throw new Error('Ce champ ne peut contenir des caractères spéciaux')            
             }
         }  
