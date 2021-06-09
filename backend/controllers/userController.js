@@ -28,7 +28,6 @@ exports.signup = (req, res, next) => {
                         email: req.body.email,
                         password: hash
                     });
-                    console.log(user)
                     user.save()
                         .then(() => res.status(201).json({ message: 'Utilisateur crée !'}))
                         .catch(error => res.status(400).json( handleErrors(error) ));
@@ -66,7 +65,7 @@ exports.login = (req, res, next) => {
                     user.email = MaskData.maskEmail2(req.body.email, emailMask2Options)
                     console.log(user)
                 })
-                .catch(error => res.status(500).json({ error }));
+            .catch(error => res.status(500).json({ error }));
         })
         .catch(error => res.status(500).json({ error }));
 };
