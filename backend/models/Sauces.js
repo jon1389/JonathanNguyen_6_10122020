@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
-const isAlphaNum = /^[a-zA-Zà-żÀ-Ż+\s.]+$/i;
+const isAlphaNum = /^[a-zA-Zà-żÀ-Ż-0-9+\s.]+$/i;
 
 const sauceSchema = mongoose.Schema({
     userId: { 
